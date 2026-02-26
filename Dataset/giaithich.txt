@@ -1,0 +1,59 @@
+id: Mã định danh duy nhất của khoản vay (Loan ID).
+
+loan_amnt: Số tiền vay được niêm yết mà người đi vay đề xuất.
+
+term: Kỳ hạn thanh toán của khoản vay (thường là 36 tháng hoặc 60 tháng).
+
+int_rate: Lãi suất của khoản vay (đơn vị phần trăm).
+
+grade: Xếp hạng tín dụng do LendingClub đánh giá (phân loại rủi ro từ A đến G).
+
+purpose: Mục đích vay vốn do người vay khai báo (ví dụ: hợp nhất nợ, mua xe, sửa nhà, đám cưới).
+
+issue_d: Tháng và năm khoản vay được giải ngân bắt đầu.
+
+emp_length: Thâm niên làm việc của người vay (số năm làm việc tại công việc hiện tại).
+
+home_ownership: Tình trạng sở hữu nhà ở (ví dụ: Thuê, Thế chấp, Sở hữu).
+
+annual_inc: Tổng thu nhập hàng năm do người vay tự khai báo.
+
+addr_state: Tiểu bang nơi cư trú của người vay.
+
+dti (Debt-to-Income): Tỷ lệ Nợ trên Thu nhập. Được tính bằng tổng nghĩa vụ trả nợ hàng tháng (không bao gồm thế chấp nhà) chia cho tổng thu nhập hàng tháng.
+
+earliest_cr_line: Tháng/năm hạn mức tín dụng đầu tiên của người vay được mở (dùng để tính tuổi đời tín dụng).
+
+fico_range_low: Điểm tín dụng FICO thấp nhất của người vay tại thời điểm giải ngân.
+
+fico_range_high: Điểm tín dụng FICO cao nhất của người vay tại thời điểm giải ngân.
+
+delinq_2yrs: Số lần quá hạn thanh toán từ 30 ngày trở lên trong hồ sơ tín dụng 2 năm qua.
+
+pub_rec: Số lượng hồ sơ công khai tiêu cực (thường là phá sản hoặc bản án dân sự).
+
+total_acc: Tổng số lượng hạn mức tín dụng hiện có trong hồ sơ (bao gồm cả đang mở và đã đóng).
+
+mort_acc: Số lượng tài khoản vay thế chấp (vay mua nhà) trong hồ sơ.
+
+revol_bal: Tổng dư nợ tín dụng quay vòng hiện tại (thường là dư nợ thẻ tín dụng).
+
+revol_util: Tỷ lệ sử dụng tín dụng quay vòng (tính bằng: Dư nợ quay vòng / Tổng hạn mức tín dụng quay vòng).
+
+total_bc_limit: Tổng hạn mức tín dụng của các thẻ ngân hàng.
+
+max_bal_bc: Số dư nợ hiện tại cao nhất trên một tài khoản thẻ tín dụng bất kỳ.
+
+il_util: Tỷ lệ sử dụng hạn mức của các khoản vay trả góp (Installment accounts).
+
+all_util: Tỷ lệ sử dụng hạn mức trên tất cả các loại tài khoản tín dụng.
+
+loan_status: Trạng thái hiện tại của khoản vay (ví dụ: Đã trả hết, Đang trả, Trễ hạn, Vỡ nợ).
+
+out_prncp: Dư nợ gốc còn lại chưa thanh toán tính đến thời điểm hiện tại.
+
+total_pymnt: Tổng số tiền đã nhận được từ người vay đến nay (bao gồm gốc, lãi và phí).
+
+recoveries: Tổng số tiền thu hồi được sau khi khoản vay đã bị ghi nhận là nợ xấu (Charged Off).
+
+last_pymnt_d: Ngày tháng ghi nhận lần thanh toán gần nhất của người vay.
