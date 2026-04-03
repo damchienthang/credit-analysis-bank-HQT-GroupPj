@@ -14,7 +14,7 @@ Quy trình thực hiện tuân thủ mô hình chuẩn của một dự án BI:
 
 ---
 
-## 🛠 Công nghệ & Kỹ năng (Tech Stack)
+## Công nghệ & Kỹ năng (Tech Stack)
 * **Ngôn ngữ:** Python (Pandas, NumPy, RegEx) để xử lý dữ liệu lớn.
 * **Cơ sở dữ liệu:** SQL Server (T-SQL) thiết kế kho dữ liệu.
 * **Mô hình hóa:** Star Schema (1 Fact, 4 Dimensions).
@@ -24,7 +24,7 @@ Quy trình thực hiện tuân thủ mô hình chuẩn của một dự án BI:
 
 ## Quy trình thực hiện chi tiết
 
-### 1. Xử lý dữ liệu thô (ETL Phase - Python)
+### 1. Xử lý dữ liệu thô (ETL Phase - Python): https://www.kaggle.com/datasets/wordsforthewise/lending-club?resource=download
 Do tập dữ liệu gốc cực lớn (151 cột), tôi đã thực hiện quy trình làm sạch nghiêm ngặt:
 * **Feature Selection:** Loại bỏ 121 cột nhiễu/thiếu dữ liệu (>90% NaN), giữ lại 30 cột trọng yếu nhất về nghiệp vụ tín dụng.
 * **Data Imputation:** Xử lý giá trị thiếu bằng phương pháp Median (cho dữ liệu số) và Logic-based mapping (cho dữ liệu định danh).
