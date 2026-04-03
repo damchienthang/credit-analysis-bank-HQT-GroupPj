@@ -1,2 +1,1 @@
 Dataset/*.csv filter=lfs diff=lfs merge=lfs -text
-Dataset/*.ipynb filter=lfs diff=lfs merge=lfs -text
