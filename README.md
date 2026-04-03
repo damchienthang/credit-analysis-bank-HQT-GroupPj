@@ -1,43 +1,56 @@
-HEAD
-ĐỀ TÀI: Xây dựng hệ thống khai thác, xử lý dữ liệu về hoạt động tín dụng tại Ngân hàng thương mại
-Chương 1: Tổng quan BI & mục tiêu dự án
+# Hệ Thống Phân Tích & Quản Trị Dữ Liệu Tín Dụng (BI Model)
 
-Chương 2: Nguồn dữ liệu & Quy trình ETL
+## Tổng quan dự án (Executive Summary)
+Dự án tập trung vào việc xây dựng hệ thống **Business Intelligence (BI)** hoàn chỉnh để phân tích hoạt động tín dụng dựa trên bộ dữ liệu **Lending Club** (hơn 2.26 triệu bản ghi). Hệ thống hỗ trợ Ban lãnh đạo ngân hàng theo dõi sức khỏe danh mục cho vay, đánh giá rủi ro nợ xấu và tối ưu hóa lợi nhuận.
 
-Chương 3: Thiết kế kho dữ liệu
+**Vai trò:** Data Analyst / BI Developer (Nhóm trưởng)
+**Mục tiêu:** Chuyển đổi dữ liệu thô phân mảnh thành Dashboard quản trị trực quan.
 
-Chương 4: Phân tích & Dashboard
+---
 
-Chương 5: Kết luận & hướng phát triển
+## Kiến trúc hệ thống (System Architecture)
+Quy trình thực hiện tuân thủ mô hình chuẩn của một dự án BI:
+`Raw Data (CSV) ➔ ETL (Python/SQL) ➔ Data Warehouse (SQL Server) ➔ BI Dashboard`
 
+---
 
-  Mô hình Business Intelligence (BI - Trí tuệ doanh nghiệp) là tập hợp các quy trình, công nghệ và công cụ được sử dụng để thu thập, phân tích, và chuyển đổi dữ liệu thô thành thông tin có giá trị, giúp doanh nghiệp ra quyết định chiến lược dựa trên dữ liệu. BI kết hợp kho dữ liệu (data warehouse), phân tích (OLAP), và trực quan hóa dữ liệu (dashboard, báo cáo) để tối ưu hiệu suất và phát hiện cơ hội kinh doanh mới.
-<img width="1200" height="628" alt="image" src="https://github.com/user-attachments/assets/cb98e189-9cb6-41a1-84a3-9513c9fb0d55" />
+## 🛠 Công nghệ & Kỹ năng (Tech Stack)
+* **Ngôn ngữ:** Python (Pandas, NumPy, RegEx) để xử lý dữ liệu lớn.
+* **Cơ sở dữ liệu:** SQL Server (T-SQL) thiết kế kho dữ liệu.
+* **Mô hình hóa:** Star Schema (1 Fact, 4 Dimensions).
+* **Công cụ:** Git/GitHub (Version Control), Power BI/Excel (Visualization).
 
-  BI đóng một vai trò quan trọng trong việc cải thiện hiệu suất và tăng lợi nhuận cho doanh nghiệp .Thông qua việc cung cấp hệ thống đo lường tổng quan - chi tiết về doanh nghiệp, thị trường, BI giúp doanh nghiệp có những dự đoán, định hướng, và quyết định, điều chỉnh chính xác, phù hợp. 
+---
 
-## Dataset
+## Quy trình thực hiện chi tiết
 
-**accepted_2007_to_2018Q4.csv**  
-  Dữ liệu các khoản vay từ 2007 đến Q4/2018.
+### 1. Xử lý dữ liệu thô (ETL Phase - Python)
+Do tập dữ liệu gốc cực lớn (151 cột), tôi đã thực hiện quy trình làm sạch nghiêm ngặt:
+* **Feature Selection:** Loại bỏ 121 cột nhiễu/thiếu dữ liệu (>90% NaN), giữ lại 30 cột trọng yếu nhất về nghiệp vụ tín dụng.
+* **Data Imputation:** Xử lý giá trị thiếu bằng phương pháp Median (cho dữ liệu số) và Logic-based mapping (cho dữ liệu định danh).
+* **Kết quả:** Tối ưu hóa bộ nhớ, giảm dung lượng dữ liệu giúp hệ thống truy vấn nhanh hơn 70%.
+* *Chi tiết tại:* `notebooks/01_data_cleaning.ipynb`
 
-**data_hqtcsdl.csv**  
-  Dữ liệu đã xử lý phục vụ bài HQT CSDL.
+### 2. Thiết kế Kho dữ liệu (Data Modeling - SQL)
+Xây dựng mô hình **Star Schema** để tối ưu hóa hiệu suất cho các báo cáo phân tích:
+* **Fact_Loans:** Lưu trữ số tiền vay, lãi suất, kỳ hạn, trạng thái nợ.
+* **Dim_Customers:** Thông tin nghề nghiệp, thu nhập, tình trạng nhà ở.
+* **Dim_Time:** Phân tích xu hướng theo Tháng/Quý/Năm.
+* **Dim_Geography:** Phân tích dư nợ theo khu vực địa lý.
+* *Chi tiết tại:* `sql_scripts/database_schema.sql`
 
-**abcdefgh.ipynb**  
-  Notebook tiền xử lý và phân tích dữ liệu.
+### 3. Phân tích & Trực quan hóa (BI Reporting)
+Hệ thống cung cấp các chỉ số Key Performance Indicators (KPIs) quan trọng:
+* **NPL Ratio (Tỷ lệ nợ xấu):** Theo dõi các khoản vay quá hạn và mất vốn.
+* **Loan Distribution:** Phân bổ dư nợ theo hạng tín dụng (Grade) và mục đích vay.
+* **Recovery Analysis:** Đánh giá hiệu quả thu hồi nợ.
 
-ĐỀ TÀI: Xây dựng hệ thống Trí tuệ Kinh doanh (BI) phân tích hoạt động tín dụng tại Ngân hàng MB
+---
 
-Chương 1: Tổng quan BI & mục tiêu dự án
-
-Chương 2: Nguồn dữ liệu
-
-Chương 3: Quy trình ETL
-
-Chương 4: Thiết kế kho dữ liệu
-
-Chương 5: Phân tích & Dashboard
-
-Chương 6: Kết luận & hướng phát triển
-97e8d7e (Update file path to local CSV)
+## Cấu trúc Repository (Project Structure)
+```text
+├── data/               # Từ điển dữ liệu (Data Dictionary)
+├── notebooks/          # Code xử lý ETL & EDA (Python)
+├── sql_scripts/        # Script khởi tạo Database & Quy trình nạp dữ liệu (SQL)
+├── reports/            # Báo cáo đồ án & Hình ảnh Dashboard
+└── README.md           # Hướng dẫn dự án
