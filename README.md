@@ -25,9 +25,12 @@ Quy trình thực hiện tuân thủ mô hình chuẩn của một dự án BI:
 ## Quy trình thực hiện chi tiết
 
 ### 1. Xử lý dữ liệu thô (ETL Phase - Python): https://www.kaggle.com/datasets/wordsforthewise/lending-club?resource=download
-Do tập dữ liệu gốc cực lớn (151 cột), tôi đã thực hiện quy trình làm sạch nghiêm ngặt:
+Do tập dữ liệu gốc cực lớn (151 cột) và gặp lỗi mã hóa Unicode, tôi đã thực hiện quy trình xử lý nghiêm ngặt:
+* **Xử lý lỗi mã hóa (Encoding):** Khắc phục lỗi `UnicodeDecodeError` bằng cách chuyển đổi bảng mã sang `latin1` và xử lý tệp nén trực tiếp bằng Pandas.
 * **Feature Selection:** Loại bỏ 121 cột nhiễu/thiếu dữ liệu (>90% NaN), giữ lại 30 cột trọng yếu nhất về nghiệp vụ tín dụng.
-* **Data Imputation:** Xử lý giá trị thiếu bằng phương pháp Median (cho dữ liệu số) và Logic-based mapping (cho dữ liệu định danh).
+* **Feature Engineering:** Trích xuất thêm 03 thuộc tính thời gian (**Year, Month, Quarter**) từ cột giải ngân, nâng tổng số lên **33 cột** để tối ưu hóa truy vấn xu hướng.
+* **Data Transformation:** Sử dụng RegEx chuẩn hóa các cột định danh (`term`, `emp_length`) về dạng số và đồng bộ định dạng ngày tháng về `YYYY-MM-DD`.
+* **Data Imputation:** Xử lý giá trị thiếu bằng phương pháp Median (cho dữ liệu số) và Logic-based mapping.
 * **Kết quả:** Tối ưu hóa bộ nhớ, giảm dung lượng dữ liệu giúp hệ thống truy vấn nhanh hơn 70%.
 * *Chi tiết tại:* `notebooks/01_data_cleaning.ipynb`
 
