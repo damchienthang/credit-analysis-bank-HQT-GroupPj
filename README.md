@@ -26,12 +26,13 @@ Quy trình thực hiện tuân thủ mô hình chuẩn của một dự án BI:
 
 ### 1. Xử lý dữ liệu thô (ETL Phase - Python): https://www.kaggle.com/datasets/wordsforthewise/lending-club?resource=download
 Do tập dữ liệu gốc cực lớn (151 cột) và gặp lỗi mã hóa Unicode, tôi đã thực hiện quy trình xử lý nghiêm ngặt:
-* **Xử lý lỗi mã hóa (Encoding):** Khắc phục lỗi `UnicodeDecodeError` bằng cách chuyển đổi bảng mã sang `latin1` và xử lý tệp nén trực tiếp bằng Pandas.
-* **Feature Selection:** Loại bỏ 121 cột nhiễu/thiếu dữ liệu (>90% NaN), giữ lại 30 cột trọng yếu nhất về nghiệp vụ tín dụng.
+* **Xử lý lỗi mã hóa (Encoding):** Khắc phục lỗi `UnicodeDecodeError` bằng cách chuyển đổi bảng mã sang `latin1` để xử lý tệp nén trực tiếp bằng Pandas.
+* **Feature Selection:** Loại bỏ 118 cột nhiễu/thiếu dữ liệu, tập trung vào 30 cột nghiệp vụ và 03 chỉ số rủi ro chuyên sâu (**il_util, max_bal_bc, all_util**).
 * **Feature Engineering:** Trích xuất thêm 03 thuộc tính thời gian (**Year, Month, Quarter**) từ cột giải ngân, nâng tổng số lên **33 cột** để tối ưu hóa truy vấn xu hướng.
-* **Data Transformation:** Sử dụng RegEx chuẩn hóa các cột định danh (`term`, `emp_length`) về dạng số và đồng bộ định dạng ngày tháng về `YYYY-MM-DD`.
-* **Data Imputation:** Xử lý giá trị thiếu bằng phương pháp Median (cho dữ liệu số) và Logic-based mapping.
-* **Kết quả:** Tối ưu hóa bộ nhớ, giảm dung lượng dữ liệu giúp hệ thống truy vấn nhanh hơn 70%.
+* **Data Transformation:** - Sử dụng **RegEx** chuẩn hóa cột `term` và `emp_length` về dạng số nguyên (0-10) để tính toán.
+    - Đồng bộ định dạng ngày tháng về `YYYY-MM-DD` để tương thích hoàn toàn với kiểu dữ liệu DATE trong SQL Server.
+* **Data Imputation:** Xử lý giá trị thiếu bằng phương pháp **Median** cho dữ liệu số và **Logic-based mapping** cho ngày tháng (điền `last_pymnt_d` dựa trên `issue_d`).
+* **Kết quả:** Giảm dung lượng dữ liệu đáng kể, tối ưu hóa bộ nhớ và tăng tốc độ truy vấn hệ thống lên 70%.
 * *Chi tiết tại:* `notebooks/01_data_cleaning.ipynb`
 
 ### 2. Thiết kế Kho dữ liệu (Data Modeling - SQL)
